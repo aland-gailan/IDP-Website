@@ -44,6 +44,7 @@ function showRegistrationClosed() {
     img.style.borderRadius = '12px';
     img.style.boxShadow = '0 4px 16px rgba(0,0,0,0.08)';
     img.style.marginBottom = '18px';
+    img.style.transition = 'transform 1s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
 
     // Close button
     const btn = document.createElement('button');
@@ -58,9 +59,35 @@ function showRegistrationClosed() {
     btn.style.cursor = 'pointer';
     btn.onclick = () => document.body.removeChild(overlay);
 
+    // Pet cat button
+    const petBtn = document.createElement('button');
+    petBtn.textContent = 'Pet cat';
+    petBtn.style.marginTop = '12px';
+    petBtn.style.marginLeft = '12px';
+    petBtn.style.padding = '10px 28px';
+    petBtn.style.fontSize = '1.1rem';
+    petBtn.style.background = '#f5a623';
+    petBtn.style.color = '#fff';
+    petBtn.style.border = 'none';
+    petBtn.style.borderRadius = '8px';
+    petBtn.style.cursor = 'pointer';
+    petBtn.onclick = () => {
+        const audio = new Audio('mao.mp3');
+        audio.play();
+        img.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            img.style.transform = '';
+        }, 1000);
+    };
+
     modal.appendChild(msg);
     modal.appendChild(img);
-    modal.appendChild(btn);
+    const btnContainer = document.createElement('div');
+    btnContainer.style.display = 'flex';
+    btnContainer.style.justifyContent = 'center';
+    btnContainer.appendChild(btn);
+    btnContainer.appendChild(petBtn);
+    modal.appendChild(btnContainer);
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
     return false;
